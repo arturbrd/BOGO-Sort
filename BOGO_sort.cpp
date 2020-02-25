@@ -5,6 +5,7 @@
 #include <string>
 #include <windows.h>
 #include <iomanip>
+#include <cctype>
 #include "sort.h"
 
 using namespace std;
@@ -13,7 +14,7 @@ int main()
 {
     czolowka();
 
-    int kontener;
+    string kontener;
     int wprowadzoneLiczby[10];
     bool jestLiczba;
 
@@ -34,14 +35,19 @@ int main()
         for (int i = 0; i < 10; i++)
         {
             cin >> kontener;
-            if (cin.fail() == 1)
+            jestLiczba = true;
+
+            for (int j = 0; j < kontener.length(); j++)
             {
-                cout << "To nie jest liczba draniu. Work in progress." << endl;
-                cin.ignore();
-                cin.clear();
+                if (!(isdigit(kontener[j]))) jestLiczba = false;
+            }
+
+            if (jestLiczba) wprowadzoneLiczby[i] = stoi(kontener);
+            else
+            {
+                cout << "To nie jest liczba draniu." << endl;
                 i--;
             }
-            else if (cin.fail() == 0) wprowadzoneLiczby[i] = kontener;
         }
 
         cout << "Liczby zapisane. Teraz nastapi sortowanie." << endl;
