@@ -10,12 +10,15 @@
 
 using namespace std;
 
+
+
 int main()
 {
-    czolowka();
+    //czolowka();
 
     string kontener;
-    int wprowadzoneLiczby[10];
+    int ileLiczb;
+
     bool jestLiczba;
 
     bool posortowane;
@@ -30,9 +33,12 @@ int main()
 
         cout << "BOGO-SORT ORIGINAL" << endl;
 
+        cout << "Ile liczb chcesz podac: ";
+        cin >> ileLiczb;
 
-        cout << "Podaj 10 liczb do sortowania (zatwierdzaj kazda liczbe enterem):" << endl;
-        for (int i = 0; i < 10; i++)
+        int* wprowadzoneLiczby = new int[ileLiczb];
+        cout << "Podaj liczby do sortowania (zatwierdzaj kazda liczbe enterem):" << endl;
+        for (int i = 0; i < ileLiczb; i++)
         {
             cin >> kontener;
             jestLiczba = true;
@@ -54,25 +60,32 @@ int main()
 
         PlaySound(TEXT("losu.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
+
+        int* losowo = new int[ileLiczb];
         start = clock();
+
         do
         {
-            losuj(wprowadzoneLiczby);
-            posortowane = sprawdz(losowo);
+            losowo = losuj(wprowadzoneLiczby, ileLiczb);
+            posortowane = sprawdz(losowo, ileLiczb);
+            if (posortowane == false) { delete[] losowo; }
             licznik++;
         } while (posortowane == false);
         stop = clock();
         czas = (stop - start) / CLOCKS_PER_SEC;
 
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < ileLiczb; j++)
         {
-            cout << losowo[j] << " ";
+            cout << *(losowo + j) << " ";
         }
 
+
+        delete[] losowo;
+        delete[] wprowadzoneLiczby;
         cout << setprecision(1000);
         cout << endl << "Liczba prob: " << licznik << endl;
         cout << "Czas sortowania: " << czas << "s." << endl;
-        
+
         cout << "Aby wyjsc wpisz 'x': ";
         cin >> wykonajPonownie;
 

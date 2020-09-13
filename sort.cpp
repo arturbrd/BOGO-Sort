@@ -3,10 +3,10 @@
 #include <ctime>
 #include <iostream>
 #include <windows.h>
+#include <utility>
 
 using namespace std;
 
-int losowo[10];
 long double licznik = 0;
 
 void czolowka()
@@ -44,33 +44,51 @@ void czolowka()
     Sleep(2000);
 }
 
-void losuj(int liczby[])
+int* losuj(int liczby[], int ilosc)
 {
+    int* losowo = new int[ilosc];
 
-	int indeks;
-	bool zajety[10] = { false, false, false, false, false,
-	false, false, false, false, false };
-	bool powtarzaj;
 
-	for (int i = 0; i < 10; i++)
-	{
-		do
-		{
-			indeks = rand() % 10;
-			if (zajety[indeks] == true) powtarzaj = true;
-			else powtarzaj = false;
-		} while (powtarzaj == true);
-		losowo[indeks] = liczby[i];
-		zajety[indeks] = true;
-	}
+    for (int i = 0; i < ilosc; i++)
+    {
+        losowo[i] = liczby[i];
+    }
+
+    int x;
+    for (int i = 0; i < ilosc; i++)
+    {
+        x = rand() % ilosc;
+        swap(losowo[i], losowo[x]);
+    }
+    /*int indeks;
+    bool* zajety = new bool[ilosc];
+    for (int i = 0; i < ilosc; i++) {
+        zajety[i] = false;
+    };
+    bool powtarzaj;
+
+    for (int i = 0; i < ilosc; i++)
+    {
+        do
+        {
+            indeks = rand() % ilosc;
+            if (zajety[indeks] == true) powtarzaj = true;
+            else powtarzaj = false;
+        } while (powtarzaj == true);
+        losowo[indeks] = liczby[i];
+        zajety[indeks] = true;
+    }
+
+    delete[] zajety;*/
+    return losowo;
 }
 
-bool sprawdz(int liczby[])
+bool sprawdz(int liczby[], int ilosc)
 {
-	for (int i = 0; i < 9; i++)
-	{
-		if (liczby[i] > liczby[i + 1]) return false;
-	}
+    for (int i = 0; i < ilosc - 1; i++)
+    {
+        if (liczby[i] > liczby[i + 1]) return false;
+    }
 
-	return true;
+    return true;
 }

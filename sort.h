@@ -1,10 +1,9 @@
 #pragma once
 
-extern int losowo[10];
 extern long double licznik;
 
 void czolowka();
 
-void losuj(int liczby[]);
+int* losuj(int liczby[], int ilosc);
 
-bool sprawdz(int liczby[]);
+bool sprawdz(int liczby[], int ilosc);
