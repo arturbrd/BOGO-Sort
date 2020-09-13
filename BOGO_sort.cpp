@@ -14,7 +14,7 @@ using namespace std;
 
 int main()
 {
-    //czolowka();
+    czolowka();
 
     string kontener;
     int ileLiczb;
@@ -86,8 +86,12 @@ int main()
         cout << endl << "Liczba prob: " << licznik << endl;
         cout << "Czas sortowania: " << czas << "s." << endl;
 
-        cout << "Aby wyjsc wpisz 'x': ";
-        cin >> wykonajPonownie;
+        do
+        {
+            cout << "Kontynuowac? (t/n): ";
+            cin >> wykonajPonownie;
+            if (wykonajPonownie != "t" && wykonajPonownie != "n") cout << "Wpisz t lub n" << endl;
+        } while (wykonajPonownie != "t" && wykonajPonownie != "n");
 
-    } while (wykonajPonownie != "x");
+    } while (wykonajPonownie == "t");
 }
